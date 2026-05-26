@@ -23,8 +23,8 @@ services:
       context: .
       dockerfile: Dockerfile.api
     container_name: amc-api
-    expoe:
-      - '7410'
+    # expoe:
+    #   - '7410'
     restart: unless-stopped
     environment:
       PORT: 7410

@@ -1,3 +1,28 @@
+# FROM node:26-alpine AS runtime
+
+# WORKDIR /app
+# ENV NODE_ENV=production
+
+# COPY package.json package-lock.json .npmrc ./
+# RUN npm ci --omit=dev && npm cache clean --force
+
+# COPY server/dist /app/server/dist
+
+# EXPOSE 3001
+
+# CMD ["node", "server/dist/server/src/index.js"]
+
+
+
+FROM node:26-alpine AS build
+
+WORKDIR /app
+COPY package.json package-lock.json .npmrc ./
+RUN npm ci
+
+COPY . .
+RUN npm run build:api
+
 FROM node:26-alpine AS runtime
 
 WORKDIR /app
@@ -6,7 +31,7 @@ ENV NODE_ENV=production
 COPY package.json package-lock.json .npmrc ./
 RUN npm ci --omit=dev && npm cache clean --force
 
-COPY server/dist /app/server/dist
+COPY --from=build /app/server/dist /app/server/dist
 
 EXPOSE 3001
 

@@ -27,5 +27,5 @@ services:
       RUNTIME_API_PROXY_URL: ${RUNTIME_API_PROXY_URL:-/api/gemini}
       RUNTIME_PYODIDE_BASE_URL: ${RUNTIME_PYODIDE_BASE_URL:-}
     ports:
-      - '${WEB_PORT:-8080}:80'
+      - '${WEB_PORT:-7411}:80'
     restart: unless-stopped

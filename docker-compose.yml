@@ -7,8 +7,6 @@ services:
     ports:
       - '${WEB_PORT:-7411}:80'
     restart: unless-stopped
-    env_file: 
-      - .env
     environment:
       RUNTIME_SERVER_MANAGED_API: ${RUNTIME_SERVER_MANAGED_API:-false}
       RUNTIME_USE_CUSTOM_API_CONFIG: ${RUNTIME_USE_CUSTOM_API_CONFIG:-true}
@@ -25,11 +23,9 @@ services:
       context: .
       dockerfile: Dockerfile.api
     container_name: amc-api
-    # expoe:
-    #   - '7410'
+    expoe:
+      - '7410'
     restart: unless-stopped
-    env_file: 
-      - .env
     environment:
       PORT: 7410
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
